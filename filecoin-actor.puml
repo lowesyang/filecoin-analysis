@@ -1,0 +1,96 @@
+@startuml
+namespace github.com\\filecoin_project\\go_filecoin\\actor {
+ class Actor {
+  Code cid.Cid
+  Head cid.Cid
+  Nonce types.Uint64
+  Balance *types.AttoFIL
+} 
+}
+namespace github.com\\filecoin_project\\go_filecoin\\actor\\builtin\\account {
+ class Actor {
+} 
+}
+namespace github.com\\filecoin_project\\go_filecoin\\actor\\builtin\\miner {
+ class Actor {
+  Bootstrap bool
+} 
+}
+namespace github.com\\filecoin_project\\go_filecoin\\actor\\builtin\\miner {
+ class Ask {
+  Price *types.AttoFIL
+  Expiry *types.BlockHeight
+  ID *big.Int
+} 
+}
+namespace github.com\\filecoin_project\\go_filecoin\\actor\\builtin\\miner {
+ class State {
+  Owner address.Address
+  PeerID peer.ID
+  PublicKey []byte
+  PledgeSectors *big.Int
+  Collateral *types.AttoFIL
+  Asks []*Ask
+  NextAskID *big.Int
+  SectorCommitments map[string]types.Commitments
+  LastUsedSectorID uint64
+  ProvingPeriodStart *types.BlockHeight
+  LastPoSt *types.BlockHeight
+  Power *big.Int
+} 
+}
+namespace github.com\\filecoin_project\\go_filecoin\\actor\\builtin\\paymentbroker {
+ class PaymentVoucher {
+  Channel types.ChannelID
+  Payer address.Address
+  Target address.Address
+  Amount types.AttoFIL
+  ValidAt types.BlockHeight
+  Signature types.Signature
+} 
+}
+namespace github.com\\filecoin_project\\go_filecoin\\actor\\builtin\\paymentbroker {
+ class PaymentChannel {
+  Target address.Address
+  Amount *types.AttoFIL
+  AmountRedeemed *types.AttoFIL
+  Eol *types.BlockHeight
+} 
+}
+namespace github.com\\filecoin_project\\go_filecoin\\actor\\builtin\\paymentbroker {
+ class Actor {
+} 
+}
+namespace github.com\\filecoin_project\\go_filecoin\\actor\\builtin\\storagemarket {
+ class Actor {
+} 
+}
+namespace github.com\\filecoin_project\\go_filecoin\\actor\\builtin\\storagemarket {
+ class State {
+  Miners cid.Cid
+  TotalCommittedStorage *big.Int
+} 
+}
+namespace github.com\\filecoin_project\\go_filecoin\\actor {
+ class storageAsBlocks {
+  s exec.Storage
+} 
+}
+namespace github.com\\filecoin_project\\go_filecoin\\actor {
+ class lookup {
+  n *hamt.Node
+  s exec.Storage
+  t reflect.Type
+} 
+}
+namespace github.com\\filecoin_project\\go_filecoin\\actor {
+ class FakeActorStorage {
+  Changed bool
+} 
+}
+namespace github.com\\filecoin_project\\go_filecoin\\actor {
+ class FakeActor {
+} 
+}
+github.com\\filecoin_project\\go_filecoin\\actor\\builtin\\miner.State ---> "*" github.com\\filecoin_project\\go_filecoin\\actor\\builtin\\miner.Ask : Asks
+@enduml
